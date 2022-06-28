@@ -33,7 +33,7 @@ namespace Repository_Layer.Service
             {
                 using (sqlConnection)
                 {
-                    SqlCommand cmd = new SqlCommand("SPUserRegister", sqlConnection);//strore procedure name
+                    SqlCommand cmd = new SqlCommand("SPUserRegister", sqlConnection);
                     cmd.CommandType = CommandType.StoredProcedure;
                     var passwordToEncript = EncodePasswordToBase64(UserReg.Password);
                     cmd.Parameters.AddWithValue("@FullName", UserReg.FullName);

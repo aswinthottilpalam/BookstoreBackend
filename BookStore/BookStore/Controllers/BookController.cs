@@ -17,7 +17,7 @@ namespace BookStore.Controllers
         }
 
         // Add book 
-        [Authorize]
+        [Authorize(Roles = Role.Admin)]
         [HttpPost("AddBook")]
         public IActionResult AddBook(AddBookModel book)
         {
@@ -28,7 +28,7 @@ namespace BookStore.Controllers
                 {
                     return this.Ok(new { Success = true, message = "Book Added Sucessfully", Response = userData });
                 }
-                return this.Ok(new { Success = true, message = "Sorry! Book Already Exists" });
+                return this.Ok(new { Success = true, message = "Sorry! Add book failed" });
             }
             catch (System.Exception ex)
             {
@@ -37,7 +37,7 @@ namespace BookStore.Controllers
         }
 
         // Update Book
-        [Authorize]
+        [Authorize(Roles = Role.Admin)]
         [HttpPost("UpdateBook")]
         public IActionResult UpdateBook(UpdateBookModel updatebook)
         {
@@ -57,7 +57,7 @@ namespace BookStore.Controllers
         }
 
         // Delete Book
-        [Authorize]
+        [Authorize(Roles = Role.Admin)]
         [HttpDelete("DeleteBook/{BookId}")]
         public IActionResult DeleteBook(int BookId)
         {
@@ -80,6 +80,7 @@ namespace BookStore.Controllers
 
 
         // Get book by bookId
+        [Authorize]
         [HttpGet("GetBookByBookId/{BookId}")]
         public IActionResult GetBookByBookId(int BookId)
         {
@@ -102,6 +103,7 @@ namespace BookStore.Controllers
         }
 
         // GetAll Books 
+        [Authorize]
         [HttpGet("GetAllBook")]
         public IActionResult GetAllBooks()
         {
